@@ -39,6 +39,8 @@ app.get("/api", (req, res) => {
   res.send({ message: "Welcome to api-gateway!" });
 });
 
+app.use("/" , proxy("http://localhost:6001"));
+
 const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/api`);
