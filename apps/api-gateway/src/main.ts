@@ -1,3 +1,4 @@
+// use this cmd to remove ADDRESS ALREADY IN USE ERROR: npx kill-port 8080*port that is showing*
 import express from "express";
 import cors from "cors";
 import proxy from "express-http-proxy";
@@ -21,7 +22,7 @@ app.use(morgan("dev"));
 app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ limit: "100mb", extended: true }));
 app.use(cookieParser());
-app.set("trust proxy", 1);
+app.set("trust proxy", 1);                          
 
 // Apply rate limiting to all requests
 const limiter = rateLimit({
@@ -30,12 +31,12 @@ const limiter = rateLimit({
   message:{error:"Too many requests, please try again later."},
   standardHeaders: true,
   legacyHeaders: true,
-  keyGenerator: (req:any) => req.ip,
+  keyGenerator: (req:any) => req.ip,                             
 });
 
 app.use(limiter);
 
-app.get("/api", (req, res) => {
+app.get("/gateway-health", (req, res) => {
   res.send({ message: "Welcome to api-gateway!" });
 });
 
